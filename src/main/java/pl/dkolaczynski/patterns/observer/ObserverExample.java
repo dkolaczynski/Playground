@@ -16,7 +16,7 @@ public class ObserverExample {
 		User user = new User();
 		user.name = "John Doe";
 
-		userDeleter.notify(user); // deleting user
+		userDeleter.deleteUser(user); // deleting user
 	}
 
 }

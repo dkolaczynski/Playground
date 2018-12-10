@@ -1,10 +1,26 @@
 package pl.dkolaczynski.patterns.observer;
 
-public interface Observable<T> {
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-	void addObserver(Observer<T> observer);
+public class Observable<T> {
 
-	void removeObserver(Observer<T> observer);
+	private final List<Observer<T>> observers;
 
-	void notify(T data);
+	public Observable() {
+		this.observers = new CopyOnWriteArrayList<>();
+	}
+
+	public void addObserver(Observer<T> observer) {
+		observers.add(observer);
+	}
+
+	public void removeObserver(Observer<T> observer) {
+		observers.remove(observer);
+	}
+
+	public void notify(T data) {
+		observers.forEach(o -> o.update(data));
+	}
+
 }
